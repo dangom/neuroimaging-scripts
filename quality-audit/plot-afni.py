@@ -52,7 +52,9 @@ def plot_afni(x, out=None):
         else:
             return tuple(i / inch for i in tupl)
 
-    fig, (tra_ax, rot_ax) = plt.subplots(nrows=2, sharex=True, dpi=100)
+    fig, (tra_ax, rot_ax) = plt.subplots(
+        nrows=2, sharex=True, dpi=300, figsize=cm2inch(9, 6)
+    )
 
     vols = x.shape[0]
 
@@ -73,10 +75,10 @@ def plot_afni(x, out=None):
         size="medium",
     )
 
-    rot_ax.set(ylim=[-1.25, 1.25])
-    rot_ax.legend(loc="upper center", ncol=3, fontsize="x-small")
-    tra_ax.set(ylim=[-1.25, 1.25], xlabel="Volumes")
-    tra_ax.legend(loc="upper center", ncol=3, fontsize="x-small")
+    rot_ax.set(ylim=[-1.25, 1.25], xlim=[0, x.shape[0]])
+    rot_ax.legend(loc="lower center", ncol=3, fontsize="x-small", frameon=False)
+    tra_ax.set(ylim=[-1.25, 1.25], xlabel="Volumes", xlim=[0, x.shape[0]])
+    tra_ax.legend(loc="lower center", ncol=3, fontsize="x-small", frameon=False)
 
     tra_ax.text(
         0.01,
@@ -90,7 +92,6 @@ def plot_afni(x, out=None):
     )
 
     fig.suptitle("Motion Parameter Estimates", y=0.94)
-
     fig.tight_layout()
     fig.subplots_adjust(hspace=0.0)
 
